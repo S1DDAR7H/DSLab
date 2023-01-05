@@ -49,6 +49,23 @@ void bsearch(int arr[10], int item){
     }
 }
 
+void sSort(int arr[10]){
+    int min;
+    for(int i = 0; i<size - 1; i++){
+        min = i;
+        for(int j = i+1; j<size ; j++){
+            if (arr[j] < arr[min]){
+                min = j;
+            }
+            if (min != i){
+                int temp = arr[min];
+                arr[min] = arr[i];
+                arr[i] = temp;
+            }
+        }
+    }
+}
+
 void bbSort(int arr[10]){
     for(int i = 0;i<size; i++){
         for(int j = 1; j<size-i-1; j++){
