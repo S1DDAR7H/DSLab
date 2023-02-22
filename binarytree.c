@@ -1,10 +1,12 @@
 #include <stdio.h> 
 #include <stdlib.h>
 
+int m[100], count=0;
+
 struct node {
     int data;
     struct node *left, *right;
-};
+}*tempL, *tempR;
 
 struct node *createitem(){
     int item;
@@ -20,16 +22,32 @@ struct node *createitem(){
         newnode->left = createitem();
         printf("Enter RChild of %d: ", item);
         newnode->right = createitem();
+        return newnode;
    }
 }
 
 void disp(struct node *root){
-    printf("%d", root->data);
-    disp(root->left);
-    disp(root->right);
+    if(root != NULL){
+        disp(root->left);
+        printf("%d ", root->data);
+        disp(root->right);
+    
+    }
+}
+
+void mirror(struct node *root){
+    if(root != NULL){
+        struct node *temp = root->left;
+        root->left = root->right;
+        root->right = temp;
+        mirror(root->left);
+        mirror(root->right);
+    }
 }
 
 void main(){
     struct node *root = createitem();
+    disp(root);
+    mirror(root);
     disp(root);
 }
